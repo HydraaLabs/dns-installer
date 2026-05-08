@@ -36,7 +36,21 @@ for arg in "$@"; do
     --uninstall) ACTION="uninstall" ;;
     --yes|-y)    ASSUME_YES=1 ;;
     -h|--help)
-      sed -n '2,15p' "$0"
+      cat <<'HELP'
+HydraaLabs DNS - Linux + macOS installer
+Sets dns.hydrabrowser.net (45.8.125.44, 185.125.168.124) as system resolver,
+with DNS-over-TLS by default.
+
+Usage:
+  curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | bash -s -- --plain
+  curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | bash -s -- --uninstall
+
+Flags:
+  --plain       Use clear DNS (port 53) instead of DoT (port 853)
+  --uninstall   Remove HydraaLabs DNS config and restore previous settings
+  --yes         Skip confirmation prompt
+HELP
       exit 0 ;;
     *) echo "Unknown flag: $arg" >&2; exit 2 ;;
   esac
