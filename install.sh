@@ -62,6 +62,12 @@ log() { printf "\033[1;36m==>\033[0m %s\n" "$*"; }
 warn() { printf "\033[1;33m!!  %s\033[0m\n" "$*" >&2; }
 die() { printf "\033[1;31m!!  %s\033[0m\n" "$*" >&2; exit 1; }
 
+# ANSI colors as variables so they can be expanded inside heredocs.
+CYAN="$(printf '\033[1;36m')"
+YELLOW="$(printf '\033[1;33m')"
+BOLD="$(printf '\033[1m')"
+RESET="$(printf '\033[0m')"
+
 require_sudo() {
   if [ "$(id -u)" -ne 0 ]; then
     if have sudo; then SUDO="sudo"; else die "Need root or sudo"; fi
@@ -70,11 +76,17 @@ require_sudo() {
   fi
 }
 
+# Confirm: auto-yes when piped (no TTY) or when --yes given.
+# Reads from /dev/tty if available so local users still get the prompt.
 confirm() {
   [ "$ASSUME_YES" -eq 1 ] && return 0
-  printf "\n%s [y/N] " "$1"
-  read -r ans
-  case "$ans" in [yY]|[yY][eE][sS]) return 0 ;; *) return 1 ;; esac
+  if [ -r /dev/tty ] && [ -t 1 ]; then
+    printf "\n%s [Y/n] " "$1" >/dev/tty
+    read -r ans </dev/tty
+    case "$ans" in [nN]|[nN][oO]) return 1 ;; *) return 0 ;; esac
+  fi
+  # Piped install (curl | bash) — proceed by default
+  return 0
 }
 
 # ----- OS detection ----------------------------------------------------------
@@ -197,7 +209,7 @@ macos_install() {
   if [ "$MODE" = "dot" ]; then
     cat <<EOF
 
-\033[1;33mNote (macOS):\033[0m DoT/DoH at OS level requires installing a configuration
+${YELLOW}Note (macOS):${RESET} DoT/DoH at OS level requires installing a configuration
 profile. Get and double-click hydrabrowser-dns.mobileconfig:
   curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/ios/hydrabrowser-dns.mobileconfig -o ~/Downloads/hydrabrowser-dns.mobileconfig
   open ~/Downloads/hydrabrowser-dns.mobileconfig
@@ -227,7 +239,7 @@ require_sudo
 
 cat <<EOF
 
-\033[1;36mHydraaLabs DNS installer\033[0m
+${CYAN}HydraaLabs DNS installer${RESET}
   Hostname : $HOSTNAME
   Servers  : ${IPV4_SERVERS[0]}, ${IPV4_SERVERS[1]}
   Mode     : $([ "$MODE" = "dot" ] && echo "DNS-over-TLS (encrypted)" || echo "Plain DNS")
@@ -248,7 +260,7 @@ fi
 
 if [ "$ACTION" = "install" ]; then
   log "Done. Test with: dig +short example.com"
-  printf "Rollback: \033[1mcurl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | sh -s -- --uninstall\033[0m\n"
+  printf "Rollback: %scurl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | bash -s -- --uninstall%s\n" "$BOLD" "$RESET"
 else
   log "Uninstall complete"
 fi
