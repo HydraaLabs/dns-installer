@@ -23,7 +23,9 @@ $ErrorActionPreference = 'Stop'
 
 # ----- Constants ------------------------------------------------------------
 $Hostname    = 'dns.hydrabrowser.net'
-$IPv4Servers = @('45.8.125.44','185.125.168.124')
+# Order matters: Windows tries the first server first, fallback to the next.
+# Norway (EU) primary for lower latency + EEA privacy. Russia secondary as fallback.
+$IPv4Servers = @('185.125.168.124','45.8.125.44')
 $DohTemplate = "https://$Hostname/dns-query"
 
 # ----- Helpers --------------------------------------------------------------

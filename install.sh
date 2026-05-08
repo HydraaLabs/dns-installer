@@ -22,7 +22,9 @@ set -euo pipefail
 
 # ----- Constants -------------------------------------------------------------
 HOSTNAME="dns.hydrabrowser.net"
-IPV4_SERVERS=("45.8.125.44" "185.125.168.124")
+# Order matters: resolvers query the first server first, fallback to the next.
+# Norway (EU) primary for lower latency + EEA privacy. Russia secondary as fallback.
+IPV4_SERVERS=("185.125.168.124" "45.8.125.44")
 TAG="hydrabrowser-dns"  # marker so we can find/remove our config
 
 # ----- Args ------------------------------------------------------------------

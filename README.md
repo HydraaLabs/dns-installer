@@ -5,7 +5,8 @@ Encrypted public DNS resolver. One-line install on Linux, macOS, Windows. Profil
 | Endpoint | Address |
 |---|---|
 | Hostname | `dns.hydrabrowser.net` |
-| IPv4 | `45.8.125.44` (Saint Petersburg, RU) — `185.125.168.124` (Sandefjord, NO) |
+| IPv4 (primary, EU) | `185.125.168.124` (Sandefjord, Norway) |
+| IPv4 (fallback) | `45.8.125.44` (Saint Petersburg, Russia) |
 | DoT | `dns.hydrabrowser.net:853` |
 | DoH | `https://dns.hydrabrowser.net/dns-query` |
 | Plain DNS | port `53` (UDP/TCP) |

@@ -13,8 +13,8 @@
         <string>dns.hydrabrowser.net</string>
         <key>ServerAddresses</key>
         <array>
-          <string>45.8.125.44</string>
           <string>185.125.168.124</string>
+          <string>45.8.125.44</string>
         </array>
       </dict>
       <key>PayloadDescription</key>
