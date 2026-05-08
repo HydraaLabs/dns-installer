@@ -19,19 +19,19 @@ DNSSEC validation enabled. No query logs. ANY queries refused (anti-amplificatio
 One line, default DoT:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | bash
 ```
 
 Plain DNS (no encryption) instead:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | sh -s -- --plain
+curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | bash -s -- --plain
 ```
 
 Uninstall / rollback:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | sh -s -- --uninstall
+curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | bash -s -- --uninstall
 ```
 
 The script auto-detects your DNS manager (`systemd-resolved`, NetworkManager, `resolvconf`) and applies the right config. macOS uses `networksetup` for plain DNS; for system-wide DoT install the [.mobileconfig](ios/hydrabrowser-dns.mobileconfig).
@@ -117,7 +117,7 @@ Abuse: `abuse@hydrabrowser.net`
 
 | Platform | Command |
 |---|---|
-| Linux / macOS | `curl -fsSL .../install.sh \| sh -s -- --uninstall` |
+| Linux / macOS | `curl -fsSL .../install.sh \| bash -s -- --uninstall` |
 | Windows | `& ([scriptblock]::Create((irm .../install.ps1))) -Uninstall` |
 | iOS / macOS profile | Settings → Profiles → Remove |
 | Android | Settings → Private DNS → Off |

@@ -4,14 +4,20 @@
 # with DNS-over-TLS by default.
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | sh
-#   curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | sh -s -- --plain
-#   curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | sh -s -- --uninstall
+#   curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | bash -s -- --plain
+#   curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh | bash -s -- --uninstall
 #
 # Flags:
 #   --plain       Use clear DNS (port 53) instead of DoT (port 853)
 #   --uninstall   Remove HydraaLabs DNS config and restore previous settings
 #   --yes         Skip confirmation prompt
+
+# Auto re-exec under bash if invoked via sh (dash etc.)
+if [ -z "${BASH_VERSION:-}" ]; then
+  exec bash -c "$(curl -fsSL https://raw.githubusercontent.com/HydraaLabs/dns-installer/main/install.sh)" -- "$@"
+fi
+
 set -euo pipefail
 
 # ----- Constants -------------------------------------------------------------
