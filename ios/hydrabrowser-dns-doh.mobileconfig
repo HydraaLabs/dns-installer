@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>PayloadContent</key>
+  <array>
+    <dict>
+      <key>DNSSettings</key>
+      <dict>
+        <key>DNSProtocol</key>
+        <string>HTTPS</string>
+        <key>ServerURL</key>
+        <string>https://dns.hydrabrowser.net/dns-query</string>
+        <key>ServerAddresses</key>
+        <array>
+          <string>45.8.125.44</string>
+          <string>185.125.168.124</string>
+        </array>
+      </dict>
+      <key>PayloadDescription</key>
+      <string>HydraaLabs DNS over HTTPS resolver</string>
+      <key>PayloadDisplayName</key>
+      <string>HydraaLabs DNS (DoH)</string>
+      <key>PayloadIdentifier</key>
+      <string>net.hydrabrowser.dns.doh</string>
+      <key>PayloadType</key>
+      <string>com.apple.dnsSettings.managed</string>
+      <key>PayloadUUID</key>
+      <string>2B1F2E8A-AE3D-5F42-9C67-9C5F2EAC11EB</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>ProhibitDisablement</key>
+      <false/>
+    </dict>
+  </array>
+  <key>PayloadDescription</key>
+  <string>Configures iOS / macOS to use dns.hydrabrowser.net for encrypted DNS over HTTPS.</string>
+  <key>PayloadDisplayName</key>
+  <string>HydraaLabs Encrypted DNS (DoH)</string>
+  <key>PayloadIdentifier</key>
+  <string>net.hydrabrowser.dns.doh.profile</string>
+  <key>PayloadOrganization</key>
+  <string>HydraaLabs</string>
+  <key>PayloadRemovalDisallowed</key>
+  <false/>
+  <key>PayloadType</key>
+  <string>Configuration</string>
+  <key>PayloadUUID</key>
+  <string>6F7C9A12-3CD8-4D45-8A2B-F4E1C8D7B0E3</string>
+  <key>PayloadVersion</key>
+  <integer>1</integer>
+</dict>
+</plist>
